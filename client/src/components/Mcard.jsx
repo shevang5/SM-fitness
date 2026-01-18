@@ -29,7 +29,7 @@ const Mcard = () => {
                             <div className="flex archivo-black-regular justify-between items-start mb-8">
                                 <div className="text-6xl md:text-9xl font-black tracking-tighter leading-none text-black dark:text-white">
                                     {daysRemaining > 0 ? daysRemaining : '00'}
-                                    <span className="text-xl md:text-2xl ml-2 font-bold uppercase tracking-widest text-zinc-500 block">Days Left</span>
+                                    <span className="text-xl md:text-2xl ml-2 font-bold uppercase tracking-widest text-red-500 block">Days Left</span>
                                 </div>
                                 <div className="text-black dark:text-white opacity-20 text-6xl font-black">*</div>
                             </div>
@@ -45,7 +45,7 @@ const Mcard = () => {
                                 </div>
                                 <div className={`h-px md:h-12 w-12 md:w-px ${isExpired ? 'bg-red-500/30' : 'bg-zinc-200 dark:bg-zinc-800'}`}></div>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500">Status</span>
+                                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-red-500">Status</span>
                                     <div className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${isExpired ? 'bg-red-500/10 text-red-500' : 'bg-black text-white dark:bg-white dark:text-black'}`}>
                                         {isExpired ? 'Inactive' : 'Active'}
                                     </div>

@@ -104,7 +104,7 @@ const UserDashboard = () => {
                                     <div className="flex justify-between items-start mb-1 md:mb-12">
                                         <div className="text-6xl md:text-9xl font-black tracking-tighter leading-none text-black dark:text-white">
                                             {daysRemaining > 0 ? daysRemaining : '00'}
-                                            <span className="text-xl md:text-2xl ml-2 font-bold uppercase tracking-widest text-zinc-500 block">Days Left</span>
+                                            <span className="text-xl md:text-2xl ml-2 font-bold uppercase tracking-widest text-red-500 block">Days Left</span>
                                         </div>
                                         <div className="text-black dark:text-white opacity-20 text-6xl font-black">*</div>
                                     </div>
@@ -114,11 +114,11 @@ const UserDashboard = () => {
                                             <h2 className="text-2xl font-black uppercase tracking-tighter mb-1 text-black dark:text-white">
                                                 {user.membership?.planName || 'Standard Access'}
                                             </h2>
-                                            <p className={`text-[10px] font-bold uppercase tracking-[0.2em] ${isExpired ? 'text-red-500' : 'text-zinc-500'}`}>
+                                            <p className={`text-[10px] font-bold uppercase tracking-[0.2em] ${isExpired ? 'text-red-500' : 'text-red-500'}`}>
                                                 {isExpired ? 'Membership Expired' : `Valid until ${new Date(user.membership.endDate).toLocaleDateString()}`}
                                             </p>
                                         </div>
-                                        <div className={`h-px md:h-12 w-12 md:w-px ${isExpired ? 'bg-red-500/30' : 'bg-zinc-200 dark:bg-zinc-800'}`}></div>
+                                        <div className={`h-px md:h-12 w-12 md:w-px ${isExpired ? 'bg-red-500/30' : 'bg-red-500'}`}></div>
                                         <div className="flex items-center gap-4">
                                             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500">Status</span>
                                             <div className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${isExpired ? 'bg-red-500/10 text-red-500' : 'bg-black text-white dark:bg-white dark:text-black'}`}>
