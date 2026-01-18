@@ -30,7 +30,7 @@ const ProgressChart = ({ userId, metric = 'weight', title = 'Progress', classNam
         const labels = entries.map(e => new Date(e.date).toLocaleDateString())
         const values = entries.map(e => e.value)
 
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const isDark = document.documentElement.classList.contains('dark')
 
         setChartData({
           labels,
@@ -39,9 +39,11 @@ const ProgressChart = ({ userId, metric = 'weight', title = 'Progress', classNam
               label: title,
               data: values,
               fill: false,
-              borderColor: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.9)',
-              backgroundColor: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)',
-              tension: 0.4
+              borderColor: isDark ? 'rgba(255,255,255,1)' : 'rgba(0,0,0,1)',
+              backgroundColor: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)',
+              tension: 0.4,
+              pointBackgroundColor: isDark ? '#fff' : '#000',
+              pointBorderColor: isDark ? '#fff' : '#000',
             }
           ]
         })
@@ -58,7 +60,32 @@ const ProgressChart = ({ userId, metric = 'weight', title = 'Progress', classNam
   return (
     <div className={`bg-zinc-50 dark:bg-zinc-900 p-6 rounded-[3rem] border border-black/5 dark:border-white/5 transition-colors duration-300 ${className}`}>
       <h4 className="text-sm font-black uppercase text-zinc-400 mb-4">{title}</h4>
-      <Line data={chartData} options={{ responsive: true, plugins: { legend: { display: false } } }} />
+      <Line
+        data={chartData}
+        options={{
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: document.documentElement.classList.contains('dark') ? '#18181b' : '#fff',
+              titleColor: document.documentElement.classList.contains('dark') ? '#fff' : '#000',
+              bodyColor: document.documentElement.classList.contains('dark') ? '#fff' : '#000',
+              borderColor: 'rgba(0,0,0,0.1)',
+              borderWidth: 1
+            }
+          },
+          scales: {
+            y: {
+              grid: { color: document.documentElement.classList.contains('dark') ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)' },
+              ticks: { color: 'rgb(161, 161, 170)', font: { size: 10, weight: 'bold' } }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: 'rgb(161, 161, 170)', font: { size: 10, weight: 'bold' } }
+            }
+          }
+        }}
+      />
     </div>
   )
 }
