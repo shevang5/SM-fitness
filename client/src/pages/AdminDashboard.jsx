@@ -77,9 +77,20 @@ const AdminDashboard = () => {
             <div className="relative z-10 max-w-7xl mx-auto">
                 {/* Header */}
                 <header className="flex  sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 md:mb-10">
-                    <div>
+                    <div className="relative">
                         <h1 className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none italic text-black dark:text-white">Admin Command Center</h1>
-                        {/* <p className="text-gray-500 text-sm">Welcome back, {user.name}</p> */}
+
+                        {/* Rotating Text Ring */}
+                        <div className="absolute -left-12 -top-12 w-24 h-24 md:w-32 md:h-32 hidden md:flex items-center justify-center opacity-5 pointer-events-none select-none">
+                            <div className="absolute inset-0 animate-[spin_12s_linear_infinite]">
+                                <svg viewBox="0 0 100 100" className="w-full h-full">
+                                    <path id="adminCircle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                                    <text className="text-[8px] font-black uppercase tracking-[0.2em] fill-black dark:fill-white">
+                                        <textPath xlinkHref="#adminCircle">ADMIN COMMAND CENTER • SECURE • ACCESS • </textPath>
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                     <div className="flex items-center gap-2">
                         <button
@@ -405,7 +416,7 @@ const AdminDashboard = () => {
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 onClick={() => setViewProgressUserId('')}
-                                className="fixed inset-0 bg-black/80 backdrop-blur-md z-[60]"
+                                className="fixed inset-0 bg-black/80 backdrop-blur-md z-60"
                             />
 
                             <motion.div
@@ -413,7 +424,7 @@ const AdminDashboard = () => {
                                 animate={{ x: 0 }}
                                 exit={{ x: '100%' }}
                                 transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-                                className="fixed top-0 right-0 h-full w-full max-w-4xl bg-white dark:bg-black z-[70] p-6 md:p-12 shadow-2xl overflow-y-auto"
+                                className="fixed top-0 right-0 h-full w-full max-w-4xl bg-white dark:bg-black z-70 p-6 md:p-12 shadow-2xl overflow-y-auto"
                             >
                                 <div className="flex justify-between pt-24 items-center mb-12">
                                     <div>
@@ -462,7 +473,7 @@ const StatsCard = ({ title, value, icon, color }) => {
             whileHover={{ y: -5 }}
             className="bg-zinc-50 dark:bg-zinc-900/50 p-3 md:p-6 rounded-xl flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2 md:gap-4 border border-black/5 dark:border-white/5 transition-colors duration-300"
         >
-            <div className={`p-2 md:p-4 rounded-xl ${colorClasses[color]} text-xl md:text-2xl flex-shrink-0`}>
+            <div className={`p-2 md:p-4 rounded-xl ${colorClasses[color]} text-xl md:text-2xl shrink-0`}>
                 {icon}
             </div>
             <div className="min-w-0">

@@ -59,18 +59,12 @@ const Mcard = () => {
 
             <button
                 onClick={() => navigate('/dashboard')}
-                className="group relative w-32 h-32 md:w-40 md:h-40 bg-black dark:bg-zinc-900 rounded-full flex items-center justify-center transition-all hover:scale-105 border border-black/5 dark:border-white/5 shadow-2xl"
+                className="group flex items-center gap-4 px-12 py-6 bg-black text-white dark:bg-white dark:text-black rounded-full text-xs font-black uppercase tracking-[0.3em] hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all duration-500 hover:scale-105 hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_20px_50px_rgba(255,255,255,0.1)] active:scale-95 mb-10"
             >
-                {/* Rotating Text Ring Simulation */}
-                <div className="absolute inset-0 animate-[spin_8s_linear_infinite] opacity-20">
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
-                        <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
-                        <text className="text-[10px] font-bold uppercase tracking-[0.2em] fill-white">
-                            <textPath xlinkHref="#circlePath">check your • Dashboard</textPath>
-                        </text>
-                    </svg>
+                Check Your Dashboard
+                <div className="w-8 h-8 rounded-full bg-white/10 dark:bg-black/10 flex items-center justify-center transition-transform group-hover:rotate-45">
+                    <ArrowDownRight className="w-4 h-4" />
                 </div>
-                <ArrowDownRight className="w-10 h-10 text-white transition-transform group-hover:rotate-45" />
             </button>
         </div>
     )

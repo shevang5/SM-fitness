@@ -64,8 +64,21 @@ const UserDashboard = () => {
                             <FiArrowLeft className="w-3 h-3 text-black dark:text-white" /> Back
                         </button>
                         <span className="text-[10px] pt-3 font-black uppercase tracking-[0.3em] text-zinc-500 mb-2 block">Account Overview</span>
-                        <h1 className="text-5xl md:text-7xl italic font-black uppercase tracking-tighter leading-none text-black dark:text-white">
+                        <h1 className="text-5xl md:text-7xl italic font-black uppercase tracking-tighter leading-none text-black dark:text-white relative">
                             My <span className="text-zinc-300 dark:text-zinc-700">Status</span>
+
+                            {/* Rotating Text Ring */}
+                            <div className="absolute -right-16 -top-8 w-24 h-24 md:w-32 md:h-32 hidden md:flex items-center justify-center opacity-10 select-none">
+                                <div className="absolute inset-0 animate-[spin_10s_linear_infinite]">
+                                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                                        <path id="dashboardCircle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                                        <text className="text-[8px] font-black uppercase tracking-[0.2em] fill-black dark:fill-white">
+                                            <textPath xlinkHref="#dashboardCircle">MEMBER PORTAL • PERFORMNACE • DATA • </textPath>
+                                        </text>
+                                    </svg>
+                                </div>
+                                <div className="w-1 h-1 bg-black dark:bg-white rounded-full" />
+                            </div>
                         </h1>
                     </div>
                     {/* <button 
