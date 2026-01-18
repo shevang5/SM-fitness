@@ -9,9 +9,27 @@ dotenv.config();
 const app = express();
 
 // Middleware
-const frontendUrl = (process.env.FRONTEND_URL || 'http://localhost:5173').replace(/\/$/, '');
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://sm-fitness-eta.vercel.app'
+];
+
+const frontendUrl = process.env.FRONTEND_URL;
+if (frontendUrl) {
+    allowedOrigins.push(frontendUrl.replace(/\/$/, ''));
+}
+
 const corsOptions = {
-    origin: frontendUrl,
+    origin: (origin, callback) => {
+        // allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.log('CORS blocked origin:', origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
