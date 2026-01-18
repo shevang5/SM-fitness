@@ -38,7 +38,7 @@ app.use(express.json());
 // Database Connection
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/gym-tracker');
+        await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/SM-FITNESS');
         console.log('MongoDB Connected');
     } catch (err) {
         console.error('MongoDB Connection Error:', err);

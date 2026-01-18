@@ -64,7 +64,7 @@ const UserDashboard = () => {
                             <FiArrowLeft className="w-3 h-3 text-black dark:text-white" /> Back
                         </button>
                         <span className="text-[10px] pt-3 font-black uppercase tracking-[0.3em] text-zinc-500 mb-2 block">Account Overview</span>
-                        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none text-black dark:text-white">
+                        <h1 className="text-5xl md:text-7xl italic font-black uppercase tracking-tighter leading-none text-black dark:text-white">
                             My <span className="text-zinc-300 dark:text-zinc-700">Status</span>
                         </h1>
                     </div>
