@@ -1,0 +1,27 @@
+.slot-machine-effect {
+    /* Default display */
+    display: inline-flex;
+    text-transform: uppercase;
+    line-height: 1;
+    /* Font size and color controlled by parent/className */
+}
+
+.char {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+
+.clone-text {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Ensure inner texts are blocks so they stack/move correctly if needed, 
+   but since they are in a span char, they behave as inline-blocks or blocks. 
+   Let's make them block to start. */
+.original-text,
+.clone-text {
+    display: block;
+}

@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+@import "tailwindcss";
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-white text-black dark:bg-gray-950 dark:text-white selection:bg-blue-500 selection:text-white transition-colors duration-300;
+}
+
+.bbh-bartle-regular {
+  font-family: 'BBH Bartle', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.archivo-black-regular {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-xl;
+}
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+}
+
+.input-glow:focus {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+@font-face {
+  font-family: 'Akira Expanded';
+  src: url('/fonts/Akira Expanded Demo.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Morganite';
+  src: url('/fonts/Morganite-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Morganite-Black.ttf */
+
+@font-face {
+  font-family: 'Morganite1';
+  src: url('/fonts/Morganite-Black.ttf') format('ttf');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-akira {
+  font-family: 'Akira Expanded', sans-serif;
+}
+
+.font-morganite {
+  font-family: 'Morganite', sans-serif;
+}
+
+.font-morganite1 {
+  font-family: 'Morganite1', sans-serif;
+}
+
+@utility bg-grid {
+  background-image: radial-gradient(circle, var(--color-blue-500 / 10%) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.dark:where(.bg-grid),
+.dark .bg-grid {
+  background-image: radial-gradient(circle, var(--color-blue-500 / 15%) 1px, transparent 1px);
+}
