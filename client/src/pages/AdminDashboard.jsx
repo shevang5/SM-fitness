@@ -6,7 +6,9 @@ import { logout } from '../features/auth/authSlice'
 import { getMembers, generateCode, resetAdmin } from '../features/admin/adminSlice'
 import { motion, AnimatePresence } from 'framer-motion'
 import API_URL from '../api/config'
-import { FiUsers, FiClock, FiActivity, FiLogOut, FiPlusCircle, FiCopy, FiCheckCircle, FiX, FiHome } from 'react-icons/fi'
+import { FiUsers, FiClock, FiActivity, FiLogOut, FiPlusCircle, FiCopy, FiCheckCircle, FiX, FiHome, FiTrendingUp } from 'react-icons/fi'
+import ProgressChart from '../components/ProgressChart'
+import ProgressLog from '../components/ProgressLog'
 
 const AdminDashboard = () => {
     const navigate = useNavigate()
@@ -19,6 +21,7 @@ const AdminDashboard = () => {
     const [selectedUserId, setSelectedUserId] = useState('')
     const [registerData, setRegisterData] = useState({ name: '', email: '', password: '' })
     const [editingUserId, setEditingUserId] = useState('')
+    const [viewProgressUserId, setViewProgressUserId] = useState('')
     const [newEndDate, setNewEndDate] = useState('')
     const [addDays, setAddDays] = useState(0)
 
@@ -75,8 +78,8 @@ const AdminDashboard = () => {
                 {/* Header */}
                 <header className="flex  sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 md:mb-10">
                     <div>
-                        <h1 className="text-xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Admin Command Center</h1>
-                        <p className="text-gray-500 text-sm">Welcome back, {user.name}</p>
+                        <h1 className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none italic text-black dark:text-white">Admin Command Center</h1>
+                        {/* <p className="text-gray-500 text-sm">Welcome back, {user.name}</p> */}
                     </div>
                     <div className="flex items-center gap-2">
                         <button
@@ -230,6 +233,7 @@ const AdminDashboard = () => {
                                                 <th className="p-3 md:p-4 whitespace-nowrap">Member Info</th>
                                                 <th className="p-3 md:p-4 whitespace-nowrap hidden sm:table-cell">Current Plan</th>
                                                 <th className="p-3 md:p-4 whitespace-nowrap">Time Left</th>
+                                                <th className="p-3 md:p-4 whitespace-nowrap">Progress</th>
                                                 <th className="p-3 md:p-4 whitespace-nowrap">Status</th>
                                                 <th className="p-3 md:p-4 whitespace-nowrap">Actions</th>
                                             </tr>
@@ -257,6 +261,14 @@ const AdminDashboard = () => {
                                                         <td className="p-3 md:p-4 text-gray-400 hidden sm:table-cell">{m.membership?.planName || 'No Plan'}</td>
                                                         <td className={`p-3 md:p-4 font-bold text-base md:text-lg whitespace-nowrap ${isExpired ? 'text-gray-400 dark:text-gray-600' : isExpiring ? 'text-orange-500 dark:text-orange-400' : 'text-black dark:text-white'}`}>
                                                             {days === -999 ? 'N/A' : days} <span className="text-xs font-normal text-gray-500">days</span>
+                                                        </td>
+                                                        <td className="p-3 md:p-4">
+                                                            <button
+                                                                onClick={() => setViewProgressUserId(m._id)}
+                                                                className="flex items-center gap-1 text-[10px] font-black uppercase tracking-widest bg-blue-500/10 text-blue-500 border border-blue-500/20 px-3 py-1 rounded-full hover:bg-blue-500 hover:text-white transition-all"
+                                                            >
+                                                                <FiTrendingUp className="text-xs" /> View
+                                                            </button>
                                                         </td>
                                                         <td className="p-3 md:p-4">
                                                             {days > 0 ? (
@@ -377,6 +389,56 @@ const AdminDashboard = () => {
                                                 Cancel
                                             </button>
                                         </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
+
+                {/* Progress Drawer */}
+                <AnimatePresence>
+                    {viewProgressUserId && (
+                        <>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setViewProgressUserId('')}
+                                className="fixed inset-0 bg-black/80 backdrop-blur-md z-[60]"
+                            />
+
+                            <motion.div
+                                initial={{ x: '100%' }}
+                                animate={{ x: 0 }}
+                                exit={{ x: '100%' }}
+                                transition={{ type: 'spring', damping: 30, stiffness: 200 }}
+                                className="fixed top-0 right-0 h-full w-full max-w-4xl bg-white dark:bg-black z-[70] p-6 md:p-12 shadow-2xl overflow-y-auto"
+                            >
+                                <div className="flex justify-between pt-24 items-center mb-12">
+                                    <div>
+                                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-2 block">Performance Analytics</span>
+                                        <h2 className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none italic text-black dark:text-white">
+                                            {members.find(m => m._id === viewProgressUserId)?.name} <span className="text-zinc-200 dark:text-zinc-800">History.</span>
+                                        </h2>
+                                    </div>
+                                    <button
+                                        onClick={() => setViewProgressUserId('')}
+                                        className="w-16 h-16 flex items-center justify-center bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-full transition-all"
+                                    >
+                                        <FiX className="text-3xl" />
+                                    </button>
+                                </div>
+
+                                <div className="space-y-12">
+                                    <div className="grid grid-cols-1 gap-8">
+                                        <div className="bg-zinc-100 dark:bg-zinc-900/50  rounded-[3rem] border border-black/5 dark:border-white/5">
+                                            <ProgressChart userId={viewProgressUserId} metric="weight" title="Weight Evolution" />
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-zinc-50 dark:bg-zinc-900 rounded-[4rem]  ">
+                                        <ProgressLog userId={viewProgressUserId} />
                                     </div>
                                 </div>
                             </motion.div>

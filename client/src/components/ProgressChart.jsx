@@ -15,14 +15,17 @@ import { Line } from 'react-chartjs-2'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
-const ProgressChart = ({ metric = 'weight', title = 'Progress', className = "" }) => {
+const ProgressChart = ({ userId, metric = 'weight', title = 'Progress', className = "" }) => {
   const [chartData, setChartData] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = JSON.parse(localStorage.getItem('user'))?.token
-        const res = await axios.get(`${API_URL}/progress?type=${metric}`, { headers: { Authorization: `Bearer ${token}` } })
+        const url = userId
+          ? `${API_URL}/progress?type=${metric}&userId=${userId}`
+          : `${API_URL}/progress?type=${metric}`
+        const res = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } })
         const entries = res.data || []
         const labels = entries.map(e => new Date(e.date).toLocaleDateString())
         const values = entries.map(e => e.value)

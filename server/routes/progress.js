@@ -27,8 +27,14 @@ router.get('/', async (req, res) => {
         if (!token) return res.status(401).json({ msg: 'No token' });
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decoded.user.id;
+        const role = decoded.user.role;
 
-        const filter = { userId };
+        let targetUserId = userId;
+        if (role === 'admin' && req.query.userId) {
+            targetUserId = req.query.userId;
+        }
+
+        const filter = { userId: targetUserId };
         if (req.query.type) filter.type = req.query.type;
 
         const entries = await ProgressEntry.find(filter).sort({ date: 1 });
